@@ -1,0 +1,19 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-read --allow-env --allow-net --watch app.ts",
+    "start": "deno run --allow-read --allow-env --allow-net app.ts",
+    "manifest": "deno run --allow-read --allow-write --allow-env --allow-net https://deno.land/x/deno_slack_sdk@2.7.0/cli/manifest.ts",
+    "trigger": "deno run --allow-read --allow-write --allow-env --allow-net https://deno.land/x/deno_slack_sdk@2.7.0/cli/trigger.ts",
+    "create-triggers": "slack-cli trigger create --trigger-def triggers/standup.ts && slack-cli trigger create --trigger-def triggers/exclude_modal.ts && slack-cli trigger create --trigger-def triggers/include_modal.ts",
+    "deploy": "slack-cli deploy",
+    "setup": "slack-cli deploy && deno task create-triggers"
+  },
+  "imports": {
+    "deno-slack-sdk/": "https://deno.land/x/deno_slack_sdk@2.7.0/",
+    "deno-slack-api/": "https://deno.land/x/deno_slack_api@2.2.3/"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window"],
+    "strict": true
+  }
+}
